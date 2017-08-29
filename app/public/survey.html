@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend Finder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <div class="container-fluid mySiteHeader">
+        <div class="container">
+            <div class="page-header">
+                <h1>Friend Finder</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container mySiteBody">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2>Survey</h2>
+          </div>
+          <div class="panel-body">
+            <form action="/survey/" method="post">
+                <div class="input-group">
+                  <span class="input-group-addon" id="name-addon">Name</span>
+                  <input type="text" class="form-control" placeholder="John Doe" aria-describedby="name-addon" required>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon" id="img-link-addon">Avatar Image Link</span>
+                  <input type="text" class="form-control" placeholder="https://www.myimage.com/image.png" aria-describedby="img-link-addon" required>
+                </div>
+                <div class="input-group">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        Submit
+                    </button>
+                </div>
+            </form>
+          </div>
+          <div class="panel-footer">
+            <a href="#" >
+                API
+            </a>
+             | 
+            <a href="#" >
+                GitHub
+            </a>
+          </div>
+        </div>
+    </div>
+</body>
+</html>

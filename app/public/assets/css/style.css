@@ -1,0 +1,32 @@
+body{
+	background: #eee;
+}
+
+h1{
+	font-size: 80px;
+}
+
+hr{
+	background: #2f2f2f;
+	height:1px;
+}
+
+p {
+	font-size: 20px;
+}
+
+.mySiteHeader{
+	background: #ccc;
+}
+
+.input-group{
+	margin-top: 10px;
+}
+
+.page-header{
+	border-bottom:none;
+}
+
+.panel{
+	margin-top: 50px;
+}

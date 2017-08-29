@@ -1,0 +1,29 @@
+{
+  "name": "friend-finder",
+  "version": "1.0.0",
+  "description": "an app to find friends",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcprice12/friend-finder.git"
+  },
+  "keywords": [
+    "npm",
+    "mysql",
+    "friends"
+  ],
+  "author": "John Price",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcprice12/friend-finder/issues"
+  },
+  "homepage": "https://github.com/jcprice12/friend-finder#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "path": "^0.12.7"
+  }
+}
