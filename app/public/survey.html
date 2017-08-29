@@ -5,6 +5,9 @@
     <title>Friend Finder</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+    <link type="text/css" rel="stylesheet" href="./assets/css/surveyStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container-fluid mySiteHeader">
@@ -20,21 +23,134 @@
             <h2>Survey</h2>
           </div>
           <div class="panel-body">
-            <form action="/survey/" method="post">
-                <div class="input-group">
-                  <span class="input-group-addon" id="name-addon">Name</span>
-                  <input type="text" class="form-control" placeholder="John Doe" aria-describedby="name-addon" required>
+            <form action="" method="post">
+                <div class="form-group myContainer">
+                    <div class="container-fluid">
+                        <h2 class="aboutYouHeader">
+                            About You
+                        </h2>
+                        <div class="input-group">
+                          <span class="input-group-addon" id="name-addon">Name</span>
+                          <input type="text" class="form-control" placeholder="John Doe" aria-describedby="name-addon" required>
+                        </div>
+                        <div class="input-group myBottom">
+                          <span class="input-group-addon" id="img-link-addon">Avatar Image Link</span>
+                          <input type="text" class="form-control" placeholder="https://www.myimage.com/image.png" aria-describedby="img-link-addon" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                  <span class="input-group-addon" id="img-link-addon">Avatar Image Link</span>
-                  <input type="text" class="form-control" placeholder="https://www.myimage.com/image.png" aria-describedby="img-link-addon" required>
+
+                <div class="form-group">
+                    <div class="container-fluid myContainer">
+                      <h2 class="aboutYouHeader">
+                            Questions
+                      </h2>
+                      <div class="input-group col-xs-12">
+                          <label class="myLabel" for="sel0">Your mind is always buzzing with unexplored ideas and plans.</label>
+                          <select class="form-control" id="sel0" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12">
+                          <label class="myLabel" for="sel1">Generally speaking, you rely more on your experience than your imagination.</label>
+                          <select class="form-control" id="sel1" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12">
+                          <label class="myLabel" for="sel2">You find it easy to stay relaxed and focused even when there is some pressure.</label>
+                          <select class="form-control" id="sel2">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel3">You rarely do something just out of sheer curiosity.</label>
+                          <select class="form-control" id="sel3" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel4">People can rarely upset you.</label>
+                          <select class="form-control" id="sel4" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel5">It is often difficult for you to relate to other people’s feelings.</label>
+                          <select class="form-control" id="sel5" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel6">In a discussion, truth should be more important than people’s sensitivities.</label>
+                          <select class="form-control" id="sel6" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel7">You rarely get carried away by fantasies and ideas.</label>
+                          <select class="form-control" id="sel7" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel8">You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</label>
+                          <select class="form-control" id="sel8" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                      <div class="input-group col-xs-12  myBottom">
+                          <label class="myLabel" for="sel9">You feel more energetic after spending time with a group of people.</label>
+                          <select class="form-control" id="sel9" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                      </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        Submit
-                    </button>
-                </div>
+                <button class="btn btn-primary btn-lg btn-block mySubmit" type="submit">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    Submit
+                </button>
             </form>
           </div>
           <div class="panel-footer">

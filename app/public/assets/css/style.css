@@ -15,12 +15,14 @@ p {
 	font-size: 20px;
 }
 
-.mySiteHeader{
-	background: #ccc;
+.myLabel{
+	color:#000;
+	font-size: 20px;
+	font-weight: normal;
 }
 
-.input-group{
-	margin-top: 10px;
+.mySiteHeader{
+	background: #ccc;
 }
 
 .page-header{
