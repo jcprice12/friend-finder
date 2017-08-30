@@ -9,17 +9,10 @@ module.exports = function(app){
         console.log(surveyId);
         if (surveyId) {
             var connection = serverFile.getConnection();
-            var myResult = {};
-            connection.connect(function(err){
-                if(err){
-                    connection.end();
-                    console.log(err);
-                    res.json(myResult);
-                }
-                surveysFile.getSurvey(res, connection, surveyId);
-            });
+            surveysFile.getSurvey(res, connection, surveyId);
         } else {
-            res.json([]);
+            var connection = serverFile.getConnection();
+            surveysFile.getSurveys(res, connection);
         }
     });
 }
