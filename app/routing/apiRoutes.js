@@ -6,13 +6,21 @@ var surveysFile = require("./../data/surveys.js");
 module.exports = function(app){
     app.get("/api/surveys/:id?", function(req, res) {
         var surveyId = req.params.id;
-        console.log(surveyId);
+        var connection = serverFile.getConnection();
         if (surveyId) {
-            var connection = serverFile.getConnection();
             surveysFile.getSurvey(res, connection, surveyId);
         } else {
-            var connection = serverFile.getConnection();
             surveysFile.getSurveys(res, connection);
+        }
+    });
+
+    app.get("/api/friends/:id?", function(req, res){
+        var personId = req.params.id;
+        var connection = serverFile.getConnection();
+        if(personId) {
+            friendsFile.getFriend(res, connection, personId, {});
+        } else {
+            friendsFile.getFriends(res, connection);
         }
     });
 }
