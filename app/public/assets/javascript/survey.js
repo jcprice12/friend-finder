@@ -36,10 +36,45 @@ function createSurvey(survey){
 }
 
 $(document).ready(function(){
-	$.get( "/api/surveys/1", function( data ) {
-		console.log(data);
-		if(data){
+	// $.get( "/api/surveys/1", function( data ) {
+	// 	console.log(data);
+	// 	if(data){
 
+	// 	}
+	// });
+	$("#submitSurvey").on("click", function(event){
+		event.preventDefault();
+
+		var myFormData = {};
+
+		var person = {};
+		person.name = $("#personName").val().trim();
+		person.imageUrl = $("#imageUrl").val().trim();
+
+		var answerSet = {};
+		answerSet.idSurveys = parseInt($("#myForm").attr("data-idSurveys"));
+		answerSet.answers = [];
+
+		var questions = document.getElementsByClassName("question");
+		var tempAnswer;
+		for(var i = 0; i < questions.length; i++){
+			tempAnswer = [];
+			tempAnswer.push(parseInt($(questions[i]).attr("data-idQuestions")));
+			tempAnswer.push(parseInt($(questions[i]).val()));
+			answerSet.answers.push(tempAnswer);
 		}
-	});
+
+		myFormData.person = person;
+		myFormData.answerSet = answerSet;
+		console.log(myFormData);
+		$.ajax({
+			type: "POST",
+			url : "/api/friends",
+			data : myFormData,
+			dataType : "json",
+			success : function(dataBack){
+				console.log(dataBack);
+			}
+		})
+	})
 });

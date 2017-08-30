@@ -86,5 +86,53 @@ var getFriends = function(httpResponse, connection){
     });
 }
 
+var insertPersonAndAnswers = function(httpResponse, myObj, connection){
+    var promise = new Promise(function(resolve, reject){
+        connection.beginTransaction(function(errTrans){
+            if(errTrans) { 
+                reject(errTrans);
+            } else {
+                connection.query("SELECT * FROM `People` WHERE name = ? AND imageUrl = ?", [myObj.person.name, myObj.person.imageUrl], function(selPersErr, selPersRes){
+                    if(selPersErr){
+                        connection.rollback(function(){
+                            reject(selPersErr);
+                        });
+                    } else {
+                        if(selPersRes.length === 0){
+                            connection.query("INSERT INTO `People` SET ?", myObj.person, function(insertErr, insertRes){
+                                if(insertErr){
+                                    connection.rollback(function(){
+                                        reject(insertErr);
+                                    });
+                                } else {
+                                    connection.query("SELECT * FROM `People` WHERE name = ? AND imageUrl = ?", [myObj.person.name, myObj.person.imageUrl], function(selMyPersErr, selMyPersRes){
+                                        if(selMyPersErr){
+                                            connection.rollback(function(){
+                                                reject(selMyPersErr);
+                                            });
+                                        } else {
+                                            connection.commit(function(commitErr){
+                                                if(commitErr){
+                                                    reject(commitErr);
+                                                } else {
+                                                    resolve(selMyPersRes);
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            resolve(selPersRes[0]);
+                        }
+                    }
+                });
+            }
+        });
+    });
+    return promise;
+}
+
+exports.insertPersonAndAnswers = insertPersonAndAnswers;
 exports.getFriends = getFriends;
 exports.getFriend = getFriend;

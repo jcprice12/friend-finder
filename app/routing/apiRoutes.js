@@ -23,4 +23,17 @@ module.exports = function(app){
             friendsFile.getFriends(res, connection);
         }
     });
+
+    app.post("/api/friends", function(req, res){
+        var newAnswerSet = req.body;
+        var connection = serverFile.getConnection();
+        var promise = friendsFile.insertPersonAndAnswers(res, newAnswerSet, connection);
+        promise.then(function(data){
+            console.log(data);
+            res.json(data);
+        }).catch(function(err){
+            console.log(err);
+            res.json([]);
+        });
+    });
 }

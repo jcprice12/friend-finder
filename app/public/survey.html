@@ -23,131 +23,131 @@
             <h2>Survey</h2>
           </div>
           <div class="panel-body">
-            <form action="" method="post">
+            <form class="survey" id="myForm" data-idSurveys="1">
                 <div class="form-group myContainer">
                     <div class="container-fluid">
-                        <h2 class="aboutYouHeader">
+                        <h2 class="formHeader">
                             About You
                         </h2>
                         <div class="input-group">
                           <span class="input-group-addon" id="name-addon">Name</span>
-                          <input type="text" class="form-control" placeholder="John Doe" aria-describedby="name-addon" required>
+                          <input id="personName" data-name="name" type="text" class="form-control" placeholder="John Doe" aria-describedby="name-addon" required>
                         </div>
                         <div class="input-group myBottom">
                           <span class="input-group-addon" id="img-link-addon">Avatar Image Link</span>
-                          <input type="text" class="form-control" placeholder="https://www.myimage.com/image.png" aria-describedby="img-link-addon" required>
+                          <input id="imageUrl" data-imageUrl="imageUrl" type="text" class="form-control" placeholder="https://www.myimage.com/image.png" aria-describedby="img-link-addon" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="container-fluid myContainer">
-                      <h2 class="aboutYouHeader">
+                      <h2 class="formHeader">
                             Questions
                       </h2>
                       <div class="input-group col-xs-12">
                           <label class="myLabel" for="sel0">Your mind is always buzzing with unexplored ideas and plans.</label>
-                          <select class="form-control" id="sel0" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel0" data-idQuestions="1" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12">
                           <label class="myLabel" for="sel1">Generally speaking, you rely more on your experience than your imagination.</label>
-                          <select class="form-control" id="sel1" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel1" data-idQuestions="2" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12">
                           <label class="myLabel" for="sel2">You find it easy to stay relaxed and focused even when there is some pressure.</label>
-                          <select class="form-control" id="sel2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel2" data-idQuestions="3" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel3">You rarely do something just out of sheer curiosity.</label>
-                          <select class="form-control" id="sel3" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel3" data-idQuestions="4" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel4">People can rarely upset you.</label>
-                          <select class="form-control" id="sel4" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel4" data-idQuestions="5" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel5">It is often difficult for you to relate to other people’s feelings.</label>
-                          <select class="form-control" id="sel5" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel5" data-idQuestions="6" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel6">In a discussion, truth should be more important than people’s sensitivities.</label>
-                          <select class="form-control" id="sel6" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel6" data-idQuestions="7" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel7">You rarely get carried away by fantasies and ideas.</label>
-                          <select class="form-control" id="sel7" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel7" data-idQuestions="8" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel8">You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</label>
-                          <select class="form-control" id="sel8" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel8" data-idQuestions="9" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                       <div class="input-group col-xs-12  myBottom">
                           <label class="myLabel" for="sel9">You feel more energetic after spending time with a group of people.</label>
-                          <select class="form-control" id="sel9" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                          <select class="form-control question" id="sel9" data-idQuestions="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                           </select>
                       </div>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-lg btn-block mySubmit" type="submit">
+                <button id="submitSurvey" class="btn btn-primary btn-lg btn-block mySubmit" type="submit">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     Submit
                 </button>
@@ -164,6 +164,6 @@
           </div>
         </div>
     </div>
-    <script src="assets/"></script>
+    <script src="assets/javascript/survey.js"></script>
 </body>
 </html>
