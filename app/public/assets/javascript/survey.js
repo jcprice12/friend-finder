@@ -61,7 +61,9 @@ function handleMatches(matches){
 }
 
 function handleEmpty(){
-
+	$("#modalNameText").html("No matches found! Please check again later");
+	$("#modalThumb").hide();
+	$("#myModal").modal("show");
 }
 
 $(document).ready(function(){
@@ -110,7 +112,9 @@ $(document).ready(function(){
 			data : myFormData,
 			dataType : "json",
 			success : function(dataBack){
-				if(dataBack){
+				console.log(dataBack);
+				var myKeys = Object.keys(dataBack);
+				if(myKeys.length > 0){
 					$.get("/api/friends", function(data){
 						var scores = [];
 						for(var i = 0; i < data.length; i++){
@@ -133,9 +137,13 @@ $(document).ready(function(){
 								scores.push(personObj);
 							}
 						}
-						scores.sort(compareNumbers);
 						console.log(scores);
-						handleMatches(scores);
+						if(scores.length > 0){
+							scores.sort(compareNumbers);							
+							handleMatches(scores);
+						} else {
+							handleEmpty();
+						}
 					}).fail(function(){
 						handleEmpty();
 					});

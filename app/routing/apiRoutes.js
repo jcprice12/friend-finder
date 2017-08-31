@@ -36,13 +36,6 @@ module.exports = function(app){
                 res.json({
                     myId : parseInt(data[0].idPeople),
                 });
-                // var getPossibleFriendsPromise = friendsFile.getPossibleFriends(data[0].idPeople, newAnswerSet.answerSet.idSurveys, connection);
-                // getPossibleFriendsPromise.then(function(data){
-                //     res.json(data);
-                // }).catch(function(err){
-                //     console.log(err);
-                //     res.json({});
-                // });
             }).catch(function(err){
                 console.log(err);
                 res.json({});
