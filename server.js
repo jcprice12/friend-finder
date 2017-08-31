@@ -7,12 +7,16 @@ var mysql = require("mysql");
 //variables
 var app = express();
 var PORT = process.env.PORT || 8080;
+var DB_HOST = process.env.DB_HOST || "localhost";
+var DB_NAME = process.env.DB_NAME || "friends_finder_db";
+var DB_USER = process.env.MYSQL_USER || "root";
+var DB_PASSWORD = process.env.MYSQL_PASSWORD || "root";
 var connection = mysql.createConnection({
-    host: "localhost",
+    host: DB_HOST,
     port: 3306,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: "friends_finder_db"
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
 });
 
 var getConnection = function(){
