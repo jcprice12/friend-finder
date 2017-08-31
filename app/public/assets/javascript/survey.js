@@ -53,11 +53,31 @@ function getDifference(myAnswersArr, apiAnswer){
 	return diff;
 }
 
+function handleMatches(matches){
+	var bestMatch = matches[0];
+	$("#modalNameText").text(bestMatch.name);
+	$("#modalImage").attr("src", bestMatch.imageUrl);
+	$('#myModal').modal('show');
+}
+
 function handleEmpty(){
 
 }
 
 $(document).ready(function(){
+
+	$('#myModal').on('hidden.bs.modal', function () {
+		$("#modalNameText").html("");
+		$("#modalThumb").hide();
+	})
+
+	$("#modalImage").on("load", function(){
+		$("#modalThumb").show();
+		console.log("Image loaded.");
+	}).on("error", function(){
+		console.log("Error loading image.");
+		$("#modalImage").attr("src", "assets/images/placeholder.jpg");
+	});
 
 	$("#myForm").submit(function(event){
 		event.preventDefault();
@@ -115,6 +135,7 @@ $(document).ready(function(){
 						}
 						scores.sort(compareNumbers);
 						console.log(scores);
+						handleMatches(scores);
 					}).fail(function(){
 						handleEmpty();
 					});
