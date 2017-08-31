@@ -86,7 +86,7 @@ var getFriends = function(httpResponse, connection){
     });
 }
 
-var insertPersonAndAnswers = function(httpResponse, myObj, connection){
+var insertPerson = function(myObj, connection){
     var promise = new Promise(function(resolve, reject){
         connection.beginTransaction(function(errTrans){
             if(errTrans) { 
@@ -113,7 +113,9 @@ var insertPersonAndAnswers = function(httpResponse, myObj, connection){
                                         } else {
                                             connection.commit(function(commitErr){
                                                 if(commitErr){
-                                                    reject(commitErr);
+                                                    connection.rollback(function(){
+                                                        reject(commitErr);
+                                                    });
                                                 } else {
                                                     resolve(selMyPersRes);
                                                 }
@@ -123,7 +125,9 @@ var insertPersonAndAnswers = function(httpResponse, myObj, connection){
                                 }
                             });
                         } else {
-                            resolve(selPersRes[0]);
+                            connection.rollback(function(){// commit or rollback? What's the difference in this case since it's just a select?
+                                resolve(selPersRes);
+                            });
                         }
                     }
                 });
@@ -133,6 +137,13 @@ var insertPersonAndAnswers = function(httpResponse, myObj, connection){
     return promise;
 }
 
-exports.insertPersonAndAnswers = insertPersonAndAnswers;
+var getPossibleFriends = function(idPeople, idSurveys, connection){
+    var promise = new Promise(function(resolve, reject){
+        connection.query();
+    });
+}
+
+exports.getPossibleFriends = getPossibleFriends;
+exports.insertPerson = insertPerson;
 exports.getFriends = getFriends;
 exports.getFriend = getFriend;

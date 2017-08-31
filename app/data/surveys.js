@@ -58,5 +58,96 @@ var getSurveys = function(httpResponse, connection){
     });
 }
 
+var insertAnswers = function(idPeople, myObj, connection){
+    var promise = new Promise(function(resolve, reject){
+        connection.beginTransaction(function(errTrans){
+            if(errTrans){
+                reject(errTrans);
+            } else {
+                connection.query("SELECT idAnswers, idQuestions, answer, idAnswerSets FROM `AnswerSets` NATURAL JOIN `Answers` WHERE idPeople = ? AND idSurveys = ?", [idPeople, myObj.answerSet.idSurveys], function(errSel, selRes){
+                    if(errSel){
+                        connection.rollback(function(){
+                            reject(errSel);
+                        });
+                    } else {
+                        if(selRes.length > 0){
+                            for(var i = 0; i < myObj.answerSet.answers.length; i++){
+                                for(var j = 0; j < selRes.length; j++){
+                                    if(parseInt(selRes[j].idQuestions) == myObj.answerSet.answers[i][0]){
+                                        myObj.answerSet.answers[i].push(parseInt(selRes[j].idAnswers));
+                                        myObj.answerSet.answers[i].push(parseInt(selRes[j].idAnswerSets));
+                                        break;
+                                    }
+                                }
+                            }
+                            var mySql = "INSERT INTO `Answers` (idQuestions, answer, idAnswers, idAnswerSets) VALUES ? ON DUPLICATE KEY UPDATE answer = VALUES(answer)";
+                            connection.query(mySql, [myObj.answerSet.answers], function(errUpdate, updateRes){
+                                if(errUpdate){
+                                    connection.rollback(function(){
+                                        reject(errUpdate);
+                                    });
+                                } else {
+                                    connection.commit(function(commitErr){
+                                        if(commitErr){
+                                            connection.rollback(function(){
+                                                reject(commitErr);
+                                            });
+                                        } else {
+                                            resolve(updateRes);
+                                        }
+                                    })
+                                }
+                            });
+                        } else {
+                            var mahAnswerSet = {
+                                "idPeople" : idPeople,
+                                "idSurveys" : myObj.answerSet.idSurveys,
+                            };
+                            connection.query("INSERT INTO `AnswerSets` SET ?", mahAnswerSet, function(errInsertAnswSet, insertAnswSetRes){
+                                if(errInsertAnswSet){
+                                    connection.rollback(function(){
+                                        reject(errInsertAnswSet);
+                                    });
+                                } else {
+                                    connection.query("SELECT idAnswerSets FROM `AnswerSets` WHERE idPeople = ? AND idSurveys = ?", [mahAnswerSet["idPeople"], mahAnswerSet["idSurveys"]], function(errSelAnswSet, selAnswSetRes){
+                                        if(errSelAnswSet){
+                                            connection.rollback(function(){
+                                                reject(errSelAnswSet);
+                                            });
+                                        } else {
+                                            for(var i = 0; i < myObj.answerSet.answers.length; i++){
+                                                myObj.answerSet.answers[i].push(parseInt(selAnswSetRes[0].idAnswerSets));
+                                            }
+                                            connection.query("INSERT INTO `Answers` (idQuestions, answer, idAnswerSets) VALUES ?", [myObj.answerSet.answers], function(errInsertAnsw, insertAnswRes){
+                                                if(errInsertAnsw){
+                                                    connection.rollback(function(){
+                                                        reject(errInsertAnsw);
+                                                    });
+                                                } else {
+                                                    connection.commit(function(commitErr){
+                                                        if(commitErr){
+                                                            connection.rollback(function(){
+                                                                reject(commitErr);
+                                                            })
+                                                        } else {
+                                                            resolve(insertAnswRes);//TODO
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+    return promise;
+}
+
+exports.insertAnswers = insertAnswers;
 exports.getSurvey = getSurvey;
 exports.getSurveys = getSurveys;

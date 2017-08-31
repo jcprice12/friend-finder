@@ -27,10 +27,17 @@ module.exports = function(app){
     app.post("/api/friends", function(req, res){
         var newAnswerSet = req.body;
         var connection = serverFile.getConnection();
-        var promise = friendsFile.insertPersonAndAnswers(res, newAnswerSet, connection);
+        var promise = friendsFile.insertPerson(newAnswerSet, connection);
         promise.then(function(data){
             console.log(data);
-            res.json(data);
+            var inserAnswPromise = surveysFile.insertAnswers(data[0].idPeople, newAnswerSet, connection);
+            inserAnswPromise.then(function(answData){
+                console.log(answData);
+                res.json(answData);
+            }).catch(function(err){
+                console.log(err);
+                res.json(data);
+            });
         }).catch(function(err){
             console.log(err);
             res.json([]);
