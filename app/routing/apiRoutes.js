@@ -33,20 +33,23 @@ module.exports = function(app){
             var inserAnswPromise = surveysFile.insertAnswers(data[0].idPeople, newAnswerSet, connection);
             inserAnswPromise.then(function(answData){
                 console.log(answData);
-                var getPossibleFriendsPromise = friendsFile.getPossibleFriends(data[0].idPeople, newAnswerSet.answerSet.idSurveys, connection);
-                getPossibleFriendsPromise.then(function(data){
-                    res.json(data);
-                }).catch(function(err){
-                    console.log(err);
-                    res.json([]);
+                res.json({
+                    myId : parseInt(data[0].idPeople),
                 });
+                // var getPossibleFriendsPromise = friendsFile.getPossibleFriends(data[0].idPeople, newAnswerSet.answerSet.idSurveys, connection);
+                // getPossibleFriendsPromise.then(function(data){
+                //     res.json(data);
+                // }).catch(function(err){
+                //     console.log(err);
+                //     res.json({});
+                // });
             }).catch(function(err){
                 console.log(err);
-                res.json([]);
+                res.json({});
             });
         }).catch(function(err){
             console.log(err);
-            res.json([]);
+            res.json({});
         });
     });
 }
