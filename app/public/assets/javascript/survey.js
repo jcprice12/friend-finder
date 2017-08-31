@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 	// 	}
 	// });
-	$("#submitSurvey").on("click", function(event){
+	$("#myForm").submit(function(event){
 		event.preventDefault();
 
 		var myFormData = {};
@@ -74,6 +74,41 @@ $(document).ready(function(){
 			dataType : "json",
 			success : function(dataBack){
 				console.log(dataBack);
+				var currentBest = {
+					"score" : null,
+					"name" : null,
+					"imageUrl" : null
+				};
+				var currentUserId = -1;
+				var currentScore;
+				for(var i = 0; i < dataBack.length; i++){
+					if(currentUserId !== dataBack[i].idPeople){
+						currentUserId = dataBack[i].idPeople;
+						currentScore = 0;				
+					}
+					for(var j = 0; j < answerSet.answers.length; j++){
+						if(answerSet.answers[j][0] === parseInt(dataBack[i].idQuestions)){
+							var diff = answerSet.answers[j][1] - parseInt(dataBack[i].answer);
+							diff = (diff * diff);
+							diff = Math.sqrt(diff);
+							currentScore += diff;
+							break;
+						}
+					}
+					if(currentBest["score"]){
+						if(currentScore <= currentBest["score"]){
+							currentBest["score"] = currentScore;
+							currentBest["name"] = dataBack[i].name;
+							currentBest["imageUrl"] = dataBack[i].imageUrl;
+						}
+					} else {
+						currentBest["score"] = currentScore;
+						currentBest["name"] = dataBack[i].name;
+						currentBest["imageUrl"] = dataBack[i].imageUrl;
+					}
+					
+				}
+				console.log(currentBest);
 			}
 		})
 	})

@@ -139,8 +139,15 @@ var insertPerson = function(myObj, connection){
 
 var getPossibleFriends = function(idPeople, idSurveys, connection){
     var promise = new Promise(function(resolve, reject){
-        connection.query();
+        connection.query("SELECT idAnswerSets, idQuestions, answer, idPeople, name, imageUrl FROM `Answers` NATURAL JOIN `AnswerSets` NATURAL JOIN `People` WHERE idSurveys = ? AND idPeople <> ? ORDER BY idPeople, idQuestions", [idSurveys, idPeople], function(err, res){
+            if(err){
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        });
     });
+    return promise
 }
 
 exports.getPossibleFriends = getPossibleFriends;
