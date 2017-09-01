@@ -11,16 +11,16 @@ var DB_HOST = process.env.DB_HOST || "localhost";
 var DB_NAME = process.env.DB_NAME || "friends_finder_db";
 var DB_USER = process.env.MYSQL_USER || "root";
 var DB_PASSWORD = process.env.MYSQL_PASSWORD || "root";
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
+    connectionLimit : 10,
     host: DB_HOST,
-    port: 3306,
     user: DB_USER,
     password: DB_PASSWORD,
     database: DB_NAME,
 });
 
-var getConnection = function(){
-    return connection;
+var getPool = function(){
+    return pool;
 }
 
 app.use(express.static(path.join(__dirname, 'app', 'public')));
@@ -36,4 +36,4 @@ app.listen(PORT, function() {
 require('./app/routing/apiRoutes.js')(app);
 require('./app/routing/htmlRoutes.js')(app);
 
-exports.getConnection = getConnection;
+exports.getPool = getPool;
