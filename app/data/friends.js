@@ -1,4 +1,5 @@
-
+//get one friend based on id
+//http response passed in and json is sent back using it.
 var getFriend = function(httpResponse, connection, id, myPassedObj){
     myObj = myPassedObj;
     connection.query("SELECT * FROM `People` NATURAL JOIN `AnswerSets` NATURAL JOIN `Answers` WHERE idPeople = ? ORDER BY idAnswerSets, idQuestions", id, function(personErr,personRes){
@@ -9,7 +10,7 @@ var getFriend = function(httpResponse, connection, id, myPassedObj){
             var counter = -1;
             var currentAnswerSet = -1;
             var tempObj;
-            if(personRes.length !== 0){
+            if(personRes.length !== 0){//don't do anything if nothing returned back
                 myObj.idPeople = personRes[0].idPeople;
                 myObj.name = personRes[0].name;
                 myObj.imageUrl = personRes[0].imageUrl;
@@ -17,7 +18,7 @@ var getFriend = function(httpResponse, connection, id, myPassedObj){
                 var tempAnswerSet;
                 var tempAnswer;
                 for(var i = 0; i < personRes.length; i++){
-                    if(currentAnswerSet !== personRes[i].idAnswerSets){
+                    if(currentAnswerSet !== personRes[i].idAnswerSets){//new answer set
                         currentAnswerSet = personRes[i].idAnswerSets;
                         counter++;
                         tempAnswerSet = {};
@@ -38,6 +39,9 @@ var getFriend = function(httpResponse, connection, id, myPassedObj){
     });
 }
 
+//get all friends from database
+//return JSON object
+//http response passed in
 var getFriends = function(httpResponse, connection){
     myObj = [];
     connection.query("SELECT * FROM `People` NATURAL JOIN `AnswerSets` NATURAL JOIN `Answers` ORDER BY idPeople, idAnswerSets, idQuestions", function(peopleErr, peopleRes){
@@ -54,7 +58,7 @@ var getFriends = function(httpResponse, connection){
                 var tempAnswerSet;
                 var tempAnswer;
                 for(var i = 0; i < peopleRes.length; i++){
-                    if(currentPerson !== peopleRes[i].idPeople){
+                    if(currentPerson !== peopleRes[i].idPeople){//new person
                         currentPerson = peopleRes[i].idPeople;
                         currentPersonCounter++;
                         currentAnswerSetCounter = -1;
@@ -65,7 +69,7 @@ var getFriends = function(httpResponse, connection){
                         tempPerson.answerSets = [];
                         myObj.push(tempPerson);
                     }
-                    if(currentAnswerSet !== peopleRes[i].idAnswerSets){
+                    if(currentAnswerSet !== peopleRes[i].idAnswerSets){//new answer set
                         currentAnswerSet = peopleRes[i].idAnswerSets;
                         currentAnswerSetCounter++;
                         tempAnswerSet = {};
@@ -86,6 +90,8 @@ var getFriends = function(httpResponse, connection){
     });
 }
 
+//insert a person if that person exists. Else, return person that already exists.
+//use a transaction to rollback in case of error
 var insertPerson = function(myObj, connection){
     var promise = new Promise(function(resolve, reject){
         connection.beginTransaction(function(errTrans){
@@ -98,7 +104,7 @@ var insertPerson = function(myObj, connection){
                             reject(selPersErr);
                         });
                     } else {
-                        if(selPersRes.length === 0){
+                        if(selPersRes.length === 0){//insert if doesn't exist
                             connection.query("INSERT INTO `People` SET ?", myObj.person, function(insertErr, insertRes){
                                 if(insertErr){
                                     connection.rollback(function(){
@@ -117,6 +123,7 @@ var insertPerson = function(myObj, connection){
                                                         reject(commitErr);
                                                     });
                                                 } else {
+                                                    //resolve with newly inserted person
                                                     resolve(selMyPersRes);
                                                 }
                                             });
@@ -124,7 +131,7 @@ var insertPerson = function(myObj, connection){
                                     });
                                 }
                             });
-                        } else {
+                        } else {//resolve with person selected
                             connection.rollback(function(){// commit or rollback? What's the difference in this case since it's just a select?
                                 resolve(selPersRes);
                             });

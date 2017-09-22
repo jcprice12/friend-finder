@@ -1,5 +1,6 @@
 var path = require("path");
 
+//this file basically only serves static html files
 module.exports = function(app){
 
     app.get("/",function(req, res){

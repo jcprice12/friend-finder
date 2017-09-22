@@ -1,9 +1,11 @@
 var path = require("path");
 var serverFile = require("./../../server.js");
-var friendsFile = require("./../data/friends.js");
-var surveysFile = require("./../data/surveys.js");
+var friendsFile = require("./../data/friends.js");//helper file for queries related to friends
+var surveysFile = require("./../data/surveys.js");//helper file for queries related to surveys
 
+//exporting so that app can be used from server.js
 module.exports = function(app){
+    //get the survey based on ID. get all surveys if no id provided
     app.get("/api/surveys/:id?", function(req, res) {
         var surveyId = req.params.id;
         var pool = serverFile.getPool();
@@ -19,7 +21,7 @@ module.exports = function(app){
             }
         });
     });
-
+    //get a friend based on id. get all friends if no id provided
     app.get("/api/friends/:id?", function(req, res){
         var personId = req.params.id;
         var pool = serverFile.getPool();
@@ -35,7 +37,7 @@ module.exports = function(app){
             }
         });
     });
-
+    //insert a person if the person exists, else update person's answer set. Find others based on answers
     app.post("/api/friends", function(req, res){
         var newAnswerSet = req.body;
         var pool = serverFile.getPool();

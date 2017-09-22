@@ -11,6 +11,7 @@ var DB_HOST = process.env.DB_HOST || "localhost";
 var DB_NAME = process.env.DB_NAME || "friends_finder_db";
 var DB_USER = process.env.MYSQL_USER || "root";
 var DB_PASSWORD = process.env.MYSQL_PASSWORD || "root";
+//using a pool so that jaws db doesn't close the db connection
 var pool = mysql.createPool({
     connectionLimit : 10,
     host: DB_HOST,
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+//start app and listen on defined port
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 });
