@@ -8,5 +8,5 @@ Take a survey and find similarly-minded people.
 Hosted on Heroku [Check Me Out!](https://pure-temple-61292.herokuapp.com/)
 
 ## Database
-![ER Diagram](./app/data/diagram.jpg)
+![ER Diagram](/app/data/diagram.jpg)
  
